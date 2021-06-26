@@ -1,0 +1,42 @@
+{% extends "layout/base.html.twig"%}
+
+{% block title %}Détail de l'article{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1 class="text-uppercase text-center mt-3 h1">Détail de l'article</h1>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="card-deck">
+        <div class="card mt-2">
+            <img class="card-img-top" src="{{base_url(" /assets/img/" ~ article.getImage().name ~"."~
+                article.getImage().fileExtension)}}" alt="{{ a.getProduct().name }}" height="400">
+            <div class="card-body bg-secondary">
+                <h2 class="card-title text-center text-white text-uppercase mt-4">{{article.nameArticle}}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row d-flex justify-content-center mt-3">
+        <div class="shadow p-4 rounded bg-secondary w-50">
+            <p class="text-center font-weight-bold text-uppercase text-white">Recette(s) contenant cet article: </p>
+            {% for recipe in recipes %}
+            <p class="text-center"><a class="font-weight-bold text-uppercase fa 2x" href={{base_url("recipeDetail/" ~
+                    recipe.idRecipe)}}>{{recipe.name}}</a></p>
+            {% endfor %}
+            <div class="d-flex justify-content-center mt-3">
+                <button class="nav-link btn btn-warning text-uppercase font-weight-bold fa 2x" id="prod"
+                    data-name="{{ article.nameArticle }}" data-price="{{ article.getPrice().price }}"
+                    data-id="{{ article.idArticle }}">
+                    <i class=" fas fa-shopping-cart mr-3"></i>Ajouter<br>"{{ article.getProduct().name }}"<br>au
+                    panier</button>
+            </div>
+            <p class="d-flex justify-content-center font-weight-bold text-uppercase text-center mt-3" id="infoCart"></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

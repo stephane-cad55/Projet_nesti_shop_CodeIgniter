@@ -1,0 +1,55 @@
+{% extends "layout/base.html.twig"%}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1 class="text-uppercase text-center mt-5 h1">Votre panier</h1>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="row mt-5">
+        <div class="col-12 mt-5">
+            <div class="table-responsive bg-light">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">Article(s)</th>
+                            <th scope="col" class="text-center">Quantité</th>
+                            <th scope="col" class="text-center">Prix Unitaire</th>
+                            <th scope="col" class="text-center">Prix total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center" id="prodCart">
+                        <!-- généré en JS -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td id="totalOrder">
+                                <!-- généré en JS -->
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 d-flex justify-content-around mt-5">
+                    <button class="nav-link btn btn-warning font-weight-bold text-uppercase" type="submit">
+                        <i class="fas fa-credit-card mr-3"></i>Payer votre panier</button>
+                </div>
+                <div class="col-sm-12 col-md-6 d-flex justify-content-around mt-5">
+                    <button class="nav-link btn btn-warning font-weight-bold text-uppercase" type="submit">Valider le
+                        panier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

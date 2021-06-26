@@ -1,0 +1,105 @@
+{% extends "layout/base.html.twig"%}
+
+{% block title %}Détail de la recette{% endblock %}
+
+{% block body %}
+
+{% if commentSave == "failed" %}
+
+<div class="row justify-content-center text-center mt-2">
+   <div class="alert alert-danger col-xs-12 col-md-4" role="alert">
+      Votre commentaire n'a pas été ajouté, il existe déjà.
+   </div>
+</div>
+
+{% endif %}
+
+{% if commentSave == "success" %}
+
+<div class="row justify-content-center text-center mt-5">
+   <div class="alert alert-success col-xs-12 col-md-4" role="alert">
+      Votre commentaire a été ajouté.
+   </div>
+</div>
+
+{% endif %}
+
+<div>
+   <h1 class="text-uppercase text-center mt-5 h1">Détail de la recette</h1>
+</div>
+
+<div class="container d-flex justify-content-center">
+   <div class="card-deck">
+      <div class="card mt-5">
+         <img class="card-img-top" src="{{base_url(" /assets/img/" ~ recipe.getImage().name ~"."~
+            recipe.getImage().fileExtension)}}" alt="{{ a.getProduct().name }}" height="400">
+         <div class="card-body bg-secondary">
+            <h2 class="card-title text-center text-white text-uppercase mt-4">{{recipe.name}}</h2>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="container">
+   <div class="row d-flex justify-content-center mt-3">
+      {% for c in cat %}
+      {% if c.id == recipe.idCat %}
+      <div class="shadow p-4 rounded text-dark text-center bg-white w-50">
+         <p class="font-weight-bold text-uppercase">Temps de préparation : {{recipe.preparationTime}} minutes</p>
+         <p class="font-weight-bold text-uppercase">Catégorie : {{c.name}}</p>
+      </div>
+      {% endif %}
+      {% endfor %}
+   </div>
+   <div class="row d-flex justify-content-center">
+      <div class="shadow p-4 mt-3 rounded text-dark w-50 bg-white">
+         <p class="text-center font-weight-bold text-uppercase">Liste des ingrédients: </p>
+         {% for ingredientRecipe in recipe.getIngredientRecipe() %}
+         <p class="font-weight-bold text-center">{{ingredientRecipe.quantity}} {{ingredientRecipe.getUnit.name}} {{ingredientRecipe.getProduct.name}}</p>
+         {% endfor %}
+      </div>
+   </div>
+   <div class="row d-flex justify-content-center">
+      <div class="shadow p-4 mt-3 rounded text-dark text-left w-50 bg-white">
+         <p class="text-center font-weight-bold text-uppercase">Préparation: </p>
+         {% for paragraph in recipe.getParagraph() %}
+         <p class="font-weight-bold text-center">{{paragraph.content}}</p>
+         {% endfor %}
+      </div>
+   </div>
+   <div class="row d-flex justify-content-center">
+      <div class="shadow p-4 mt-3 rounded text-dark text-left w-50 bg-white">
+         <p class="text-center font-weight-bold text-uppercase">Difficulté: {{recipe.difficulty}} / 5</p>
+         <p></p>
+      </div>
+   </div>
+   <div class="row d-flex justify-content-center">
+      <div class="shadow p-4 mt-3 rounded text-dark w-50 bg-white">
+         <p class="text-center font-weight-bold text-uppercase">Commentaires des utilisateurs: </p>
+         {% for comments in recipe.getComments() %}
+         <p class="font-weight-bold text-center">
+            {{comments.commentTitle}} : {{comments.commentContent}}</p>
+         {% endfor %}
+      </div>
+   </div>
+   {% if loggedInUser == true %}
+   <div class="row d-flex justify-content-center">
+      <div class="shadow p-4 mt-3 rounded text-dark w-50 bg-white">
+         <p class="text-center font-weight-bold text-uppercase">Ajouter des commentaires: </p>
+         {{form_open(base_url('recipeDetail'~"/"~recipe.idRecipe))}}
+         <div class="form-group">
+            <label for="title" class="font-weight-bold text-uppercase">Titre du commentaire :</label>
+            <input type="text" id="title" name="titleComment" required class="form-control mt-3 ">
+            <label for="comment" class="font-weight-bold text-uppercase">Votre commentaire :</label>
+            <textarea class="form-control" id="comment" name="contentComment" required
+               rows="3"></textarea>
+         </div>
+         <div class="d-flex justify-content-center mt-2">
+            <button class="nav-link btn btn-warning" type="submit" value="Envoyer le formulaire" class="btn btn-sm">Envoyer</button>
+         </div>
+         {{form_close}}
+      </div>
+   </div>
+   {% endif %}
+</div>
+
+{% endblock %}

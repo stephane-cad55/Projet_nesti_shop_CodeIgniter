@@ -1,0 +1,57 @@
+{% extends "layout/base.html.twig"%}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+
+{% if message == "failed" %}
+
+<div class="row justify-content-center text-center mt-2">
+  <div class="alert alert-danger col-xs-12 col-md-4" role="alert">
+    L'identifiant ou le mot de passe est incorrect.
+  </div>
+</div>
+
+{% endif %}
+
+{% if message == "logout" %}
+
+<div class="row justify-content-center text-center mt-5">
+  <div class="alert alert-success col-xs-12 col-md-4" role="alert">
+    Déconnexion réussie.
+  </div>
+</div>
+
+{% endif %}
+
+<h1 class="navbar-brand fa-2x text-uppercase d-flex justify-content-center mt-5">Se connecter</h1>
+
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto position">
+      <div class="card card-signin">
+        <div class="card-body connection">
+          {{ form_open(base_url('connection')) }}
+          <label for="login" class="font-weight-bold">Identifiant</label>
+          <div class="form-label-group">
+            <input type="text" id="login" name="user[login]" class="form-control mt-3" placeholder="Identifiant"
+              required>
+          </div>
+          <label for="password" class="font-weight-bold">Mot de passe</label>
+          <div class="form-label-group">
+            <input type="password" id="password" name="user[password]" class="form-control mt-3" placeholder="Mot de passe"
+              required>
+          </div>
+          <div class="d-flex justify-content-around">
+            <button class="btn btn-warning text-uppercase mt-5" type="submit">Se connecter
+            </button>
+            <a class="btn btn-warning text-uppercase mt-5" href="{{base_url('registration')}}">S'inscrire</a>
+          </div>
+          {{form_close}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+ /*recettes*/
+
+ button, .h2, p, h3, h4, p {
+     font-family: monospace;
+ }
+
+ a {
+     color: white;
+     text-decoration: none;
+ }
+
+ a:hover {
+     color: #efb283;
+     text-decoration: none;
+ }
+
+ .form-control-borderless {
+     border: none;
+ }
+
+ .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+     border: none;
+     outline: none;
+     box-shadow: none;
+ }
+
+ .card-body {
+     padding: 0.75em;
+ }
+
+ /* ======Cards======= */
+
+ .recipes .section {
+     padding: 50px 0;
+ }
+
+ .recipes .flex-row-stretch {
+     display: flex;
+     align-items: stretch;
+     flex-wrap: wrap;
+ }
+
+ .recipes .flex-col {
+     margin-bottom: 30px;
+ }
+
+ @media (max-width: 768px) {
+     .recipes .flex-col {
+         width: 100%;
+         margin-bottom: 15px;
+     }
+ }
+
+ .card-deck {
+     height: 400px;
+     width: 500px;
+ }
+
+ .recipes .card {
+     position: relative;
+     height: 80%;
+     margin: 0 auto;
+     overflow: hidden;
+     text-align: left;
+     border-radius: 6px;
+     box-shadow: 0 4px 15px -2px rgba(0, 0, 0, .2);
+     -webkit-box-shadow: 0 4px 15px -2px rgba(0, 0, 0, .2);
+     background-color: #fff;
+     display: flex;
+     flex-direction: column;
+     flex-grow: 1;
+ }
+
+ .recipes .card-body {
+     padding: 0;
+     display: flex;
+     flex-direction: column;
+     flex: 1 1 auto;
+ }
+
+ .recipes .card-photo {
+     background-position: 50% 50%;
+     background-size: cover;
+     background-repeat: no-repeat;
+     height: 200px;
+ }
+
+ img {
+     width: 440px;
+     height: 240px;
+ }
+
+ .recipes .card h4 {
+     margin: 0 0 13px;
+ }

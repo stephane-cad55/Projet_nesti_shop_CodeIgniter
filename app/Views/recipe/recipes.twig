@@ -1,0 +1,77 @@
+{% extends "layout/base.html.twig"%}
+
+{% block title %}Recettes{% endblock %}
+
+{% block body %}
+
+<div>
+  <h1 class="text-uppercase text-center mt-5 h1">Liste des recettes par catégorie</h1>
+</div>
+
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <form class="card card-sm">
+      <!-- {{form_open(base_url('recipeDetail'~"/"~recipe.idRecipe))}} -->
+      <div class="card card-sm">
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-search h4 text-body"></i>
+          </div>
+          <!--end of col-->
+          <div class="col">
+            <label for="search" hidden>rechercher</label>
+            <input class="form-control form-control-lg form-control-borderless" name="oneRecipe" type="search" id="search"
+              placeholder="Rechercher une recette">
+          </div>
+          <!--end of col-->
+          <div class="col-auto">
+            <button class="btn btn-lg btn-warning" type="submit">Rechercher</button>
+          </div>
+          <!--end of col-->
+        </div>
+        <!-- {{form_close}} -->
+        </form>
+      </div>
+    </div>
+      <!--end of col-->
+    </div>
+  </div>
+
+  <div class="section recipes mt-5 pl-5 pr-5">
+    <div class="container-fluid">
+      <div class="row flex-row-stretch">
+        {% for c in cat %}
+        {% for recipe in recipes %}
+        {% if c.id == recipe.idCat %}
+        <div class="col-sm-6 col-md-4 col-lg-3 flex-col">
+          <h2 class="text-center text-uppercase">Catégorie :<em>{{c.name}}</em></h2>
+          <div class="card">
+            {% if recipe.idImage is empty %}
+            <div class="card-photo">
+              <img src="{{base_url(" /assets/img/default-image.jpg")}}" alt="{{ a.getProduct().name }}">
+            </div>
+            {% else %}
+            <div class="card-photo">
+              <img src="{{base_url(" /assets/img/" ~ recipe.getImage().name ~"."~ recipe.getImage().fileExtension)}}"
+                alt="{{ a.getProduct().name }}">
+            </div>
+            {% endif %}
+            <div class="card-body pt-3 bg-secondary">
+              <h3 class="text-center text-uppercase"><a class="link" href={{base_url('recipeDetail')~'/'~
+                  recipe.idRecipe}}>{{recipe.name}}</a></h3>
+              <div>
+                <p class="text-white ml-2">Note : {{recipe.getGrades().rating}} / 5</p>
+                <p class="text-white m-2 mb-5">{{recipe.getComments()|length}} Commentaire(s)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
